@@ -1,29 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
+  Alert,
+  FlatList,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
-
-function App(): JSX.Element {
+import {SafeAreaView} from 'react-native-safe-area-context';
+import CountriesList from './src/screens/countries';
+const Stack = createNativeStackNavigator();
+function App() {
   return (
-    <SafeAreaView>
-      <StatusBar />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View>
-          <Text>Hello World Apps</Text>
-        </View>
-      </ScrollView>
+    <SafeAreaView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Countries" component={CountriesList} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }
