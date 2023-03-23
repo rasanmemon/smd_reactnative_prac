@@ -1,39 +1,34 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
+/* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useState, useEffect} from 'react';
-import {
-  Alert,
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
 
-const CountriesList = () => {
-  const [countries, setCountries] = useState();
+import { useEffect, useState } from 'react';
+import { Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
+
+const CountriesList = ({ navigation }: any) => {
+  const [countries, setCountries] = useState([]);
+
   useEffect(() => {
-    fetch('https://api.eatachi.co/api/' + 'country')
+    fetch('https://api.eatachi.co/api/country')
       .then(response => {
         return response.json();
       })
       .then(newCountries => {
         setCountries(newCountries);
-        // console.log({countries});
       })
-      .catch(err => {
-        Alert.alert(err);
-      });
+      .catch(err => Alert.alert('Error', err));
   }, []);
-  const displayCountries = (itemObject: any) => {
-    const {index, item} = itemObject;
+
+  const displayCountry = (itemObject: any) => {
+    const { index, item } = itemObject;
+
     return (
       <TouchableOpacity
-        onPress={() => Alert.alert('Cities of Country', item.Name)}>
+        onPress={() =>
+          navigation.navigate('Cities', { countryId: item.CountryId })
+        }>
         <View
           style={{
             backgroundColor: index % 2 === 0 ? 'blue' : 'green',
@@ -62,21 +57,12 @@ const CountriesList = () => {
       </TouchableOpacity>
     );
   };
+
   return (
-    <View style={{height: '100%', flex: 1}}>
-      <Text
-        style={{
-          textAlign: 'center',
-          color: 'black',
-          fontSize: 16,
-          fontWeight: 'bold',
-        }}>
-        Countries of the World
-      </Text>
-      <FlatList data={countries} renderItem={displayCountries} />
+    <View style={{ flex: 1 }}>
+      <FlatList data={countries} renderItem={displayCountry} />
     </View>
   );
 };
 
-// const styles = StyleSheet.create({});
 export default CountriesList;
