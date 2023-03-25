@@ -4,22 +4,25 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import { useEffect, useState } from 'react';
-import { Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
 
-const CitiesList = ({ route }: any) => {
+const CitiesList = ({ route, navigation }: any) => {
     const [cites, setCities] = useState([]);
-
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        const { countryId } = route.params;
-
+        setLoading(true);
+        const { countryId, countryName } = route.params;
+        navigation.setOptions({ headerTitle: `Cities of ${countryName}` });
         fetch(`https://api.eatachi.co/api/City/ByCountry/${countryId}`)
             .then(response => {
                 return response.json();
             })
             .then(newCities => {
                 setCities(newCities);
+
             })
-            .catch(err => Alert.alert('Error', err));
+            .catch(err => Alert.alert('Error', err))
+            .finally(() => setLoading(false));
     }, []);
 
     const displayCity = ({ item }: any) => {
@@ -35,6 +38,7 @@ const CitiesList = ({ route }: any) => {
                         style={{
                             fontSize: 18,
                             fontWeight: 'bold',
+                            color: 'black',
                         }}>
                         {item.Name}
                     </Text>
@@ -44,8 +48,10 @@ const CitiesList = ({ route }: any) => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
-            <FlatList data={cites} renderItem={displayCity} />
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+            {loading ? <ActivityIndicator /> :
+                <FlatList data={cites} renderItem={displayCity} />
+            }
         </View>
     );
 };

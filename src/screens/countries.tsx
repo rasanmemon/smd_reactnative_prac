@@ -1,24 +1,25 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable eslint-comments/no-unused-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { useEffect, useState } from 'react';
-import { Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
-
+import { ActivityIndicator, Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
 const CountriesList = ({ navigation }: any) => {
   const [countries, setCountries] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     fetch('https://api.eatachi.co/api/country')
       .then(response => {
         return response.json();
       })
       .then(newCountries => {
         setCountries(newCountries);
+
+
       })
-      .catch(err => Alert.alert('Error', err));
+      .catch(err => Alert.alert('Error', err))
+      .finally(() => setLoading(false));
+
   }, []);
 
   const displayCountry = (itemObject: any) => {
@@ -27,7 +28,7 @@ const CountriesList = ({ navigation }: any) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Cities', { countryId: item.CountryId })
+          navigation.navigate('Cities', { countryId: item.CountryId, countryName: item.Name })
         }>
         <View
           style={{
@@ -57,10 +58,26 @@ const CountriesList = ({ navigation }: any) => {
       </TouchableOpacity>
     );
   };
+  const countryIndex = () => {
+    return (
 
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>A</Text>
+        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>B</Text>
+        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>C</Text>
+        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>D</Text>
+      </View>
+    );
+  };
   return (
-    <View style={{ flex: 1 }}>
-      <FlatList data={countries} renderItem={displayCountry} />
+    <View style={{ flex: 1, justifyContent: 'center' }}>
+      {loading ? (<ActivityIndicator />) : (
+        <View style={{ flex: 1 }}>
+          {countryIndex()}
+          <FlatList data={countries} renderItem={displayCountry} />
+        </View>
+      )
+      }
     </View>
   );
 };
