@@ -1,6 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react-native/no-inline-styles */
+
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
 const CountriesList = ({ navigation }: any) => {
@@ -73,7 +71,13 @@ const CountriesList = ({ navigation }: any) => {
     <View style={{ flex: 1, justifyContent: 'center' }}>
       {loading ? (<ActivityIndicator />) : (
         <View style={{ flex: 1 }}>
-          {countryIndex()}
+          <Text style={{
+              color: 'black',
+              fontSize: 18,
+              fontWeight: 'bold',
+              textAlign:'center'
+            }}>Countries of the World</Text>
+          {/* {countryIndex()} */}
           <FlatList data={countries} renderItem={displayCountry} />
         </View>
       )
