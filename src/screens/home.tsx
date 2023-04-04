@@ -28,7 +28,7 @@ const MyHeader = ({navigation, route, options}: any) => {
         resizeMode="contain"
         style={{width: 140, height: 40}}
       />
-      <Maticons name="menu" size={24} color={"black"}/>
+      <Maticons name="menu" size={24} color={'black'} />
     </View>
   );
 };

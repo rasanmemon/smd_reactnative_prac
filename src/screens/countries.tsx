@@ -1,7 +1,13 @@
-
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, FlatList, Text, TouchableOpacity, View } from 'react-native';
-const CountriesList = ({ navigation }: any) => {
+import {useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+const CountriesList = ({navigation}: any) => {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -12,21 +18,21 @@ const CountriesList = ({ navigation }: any) => {
       })
       .then(newCountries => {
         setCountries(newCountries);
-
-
       })
       .catch(err => Alert.alert('Error', err))
       .finally(() => setLoading(false));
-
   }, []);
 
   const displayCountry = (itemObject: any) => {
-    const { index, item } = itemObject;
+    const {index, item} = itemObject;
 
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Cities', { countryId: item.CountryId, countryName: item.Name })
+          navigation.navigate('Cities', {
+            countryId: item.CountryId,
+            countryName: item.Name,
+          })
         }>
         <View
           style={{
@@ -58,30 +64,33 @@ const CountriesList = ({ navigation }: any) => {
   };
   const countryIndex = () => {
     return (
-
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>A</Text>
-        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>B</Text>
-        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>C</Text>
-        <Text style={{ marginHorizontal: 8, backgroundColor: 'grey' }}>D</Text>
+      <View style={{flexDirection: 'row'}}>
+        <Text style={{marginHorizontal: 8, backgroundColor: 'grey'}}>A</Text>
+        <Text style={{marginHorizontal: 8, backgroundColor: 'grey'}}>B</Text>
+        <Text style={{marginHorizontal: 8, backgroundColor: 'grey'}}>C</Text>
+        <Text style={{marginHorizontal: 8, backgroundColor: 'grey'}}>D</Text>
       </View>
     );
   };
   return (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      {loading ? (<ActivityIndicator />) : (
-        <View style={{ flex: 1 }}>
-          <Text style={{
+    <View style={{flex: 1, justifyContent: 'center'}}>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <View style={{flex: 1}}>
+          <Text
+            style={{
               color: 'black',
               fontSize: 18,
               fontWeight: 'bold',
-              textAlign:'center'
-            }}>Countries of the World</Text>
+              textAlign: 'center',
+            }}>
+            Countries of the World
+          </Text>
           {/* {countryIndex()} */}
           <FlatList data={countries} renderItem={displayCountry} />
         </View>
-      )
-      }
+      )}
     </View>
   );
 };
