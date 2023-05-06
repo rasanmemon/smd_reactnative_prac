@@ -3,12 +3,14 @@ import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Maticons from 'react-native-vector-icons/MaterialIcons';
+import MatCicons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import CountriesList from './countries';
 import Tab2 from './tab2';
 import Tab3 from './tab3';
 import Tab4 from './tab4';
 import {Image} from 'react-native';
+import Tab5 from './tab5';
 
 const Tab = createBottomTabNavigator();
 const MyHeader = ({navigation, route, options}: any) => {
@@ -74,14 +76,45 @@ export default function Home() {
         name="Screen1"
         component={Tab3}
         options={{
-          tabBarIconStyle: {display: 'none'},
+          tabBarIcon: tabinfo => {
+            return (
+              <Maticons
+                name="account-circle"
+                size={24}
+                color={tabinfo.focused ? '#006600' : '#8e8e93'}
+              />
+            );
+          },
         }}
       />
       <Tab.Screen
         name="Screen2"
         component={Tab4}
         options={{
-          tabBarIconStyle: {display: 'none'},
+          tabBarIcon: tabinfo => {
+            return (
+              <MatCicons
+                name="counter"
+                size={24}
+                color={tabinfo.focused ? '#006600' : '#8e8e93'}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Screen3"
+        component={Tab5}
+        options={{
+          tabBarIcon: tabinfo => {
+            return (
+              <MatCicons
+                name="google-maps"
+                size={24}
+                color={tabinfo.focused ? '#006600' : '#8e8e93'}
+              />
+            );
+          },
         }}
       />
     </Tab.Navigator>

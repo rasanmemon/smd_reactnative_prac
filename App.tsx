@@ -15,10 +15,14 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CitiesList from './src/screens/cities';
 import CountriesList from './src/screens/countries';
 import Home from './src/screens/home';
+import Takepicture from './src/screens/takepicture';
+import AppContextProvider from './src/context/appcontext';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
     // <SafeAreaView style={{ flex: 1 }}>
+    <AppContextProvider>
+
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
@@ -27,9 +31,11 @@ function App() {
           name="Cities"
           component={CitiesList}
           options={{headerShown: true}}
-        />
+          />
+        <Stack.Screen name="TakePicture" component={Takepicture} />
       </Stack.Navigator>
     </NavigationContainer>
+    </AppContextProvider>
     // </SafeAreaView>
   );
 }

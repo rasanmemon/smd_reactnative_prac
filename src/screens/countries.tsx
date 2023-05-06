@@ -2,12 +2,14 @@ import {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Button,
   FlatList,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 const CountriesList = ({navigation}: any) => {
+  
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -72,6 +74,7 @@ const CountriesList = ({navigation}: any) => {
       </View>
     );
   };
+  
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
       {loading ? (
