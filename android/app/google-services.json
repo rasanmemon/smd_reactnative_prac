@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038519062509",
+    "project_id": "reactnative-prac",
+    "storage_bucket": "reactnative-prac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038519062509:android:92a8b1bfb205efc79061e4",
+        "android_client_info": {
+          "package_name": "com.firstmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038519062509-jj1dpn38476dmhr5bkftgretkkrnh4je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF0LteC89NieKbu2IGsBZjo4ETvZ2bsdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038519062509-jj1dpn38476dmhr5bkftgretkkrnh4je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
